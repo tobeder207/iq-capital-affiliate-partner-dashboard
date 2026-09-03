@@ -200,41 +200,42 @@ footer{margin-top:44px;font-size:12.5px;color:var(--ink-30);line-height:1.7}
   var CACHE_KEY = "iqc-partner-desk-csv";
   var LANG_KEY  = "iqc-partner-desk-lang";
   /* build-time snapshot: shown instantly and whenever Google cannot be reached */
-  var FALLBACK_CSV = `,,,,,,
-,IQ CAPITAL, CONTENTPLAN 2026 / 2027,,,,
-,,,,,,
-     Marketing / Affiliate Team  ·  Produktdaten live von iqcapital.io geprüft,,,,,,
-,,,,,,
-KW,Zeitraum,Kampagnenthema,Specialsale,Sonstige Infos,Status / Freigabe,Marketing Material
-KW 37,7.–13. Sep,Fokus: Instant Fundings,"Montag bis Freitag: 100 % Fokus auf Instant Fundings – mit 3+1 Aktion und einem riesigen Giveaway: 100 x 50K Fundings, die unter allen Käufern von Instant Fundings verlost werden.",,TRUE,https://drive.google.com/drive/folders/1E6gJ0E_8fx7Z1yGWyS5CnhbGnGnaMUoU
-KW 38,14.–20. Sep,Q3 - Quarterly Event. / 17.09,,,Entwurf,
-KW 39,21.–27. Sep,After Quarterly Week,,,Entwurf,
-KW 40,28. Sep–4. Okt,,,,Entwurf,
-KW 41,5.–11. Okt,,,,Entwurf,
-KW 42,12.–18. Okt,,,,Entwurf,
-KW 43,19.–25. Okt,,,,Entwurf,
-KW 44,26. Okt–1. Nov,,,,Entwurf,
-KW 45,2.–8. Nov,,,,Entwurf,
-KW 46,9.–15. Nov,Black-Friday-Vorbereitung,,,Entwurf,
-KW 47,16.–22. Nov,Black Friday Sale,,,Entwurf,
-KW 48,23.–29. Nov,Black Friday Week,,,Entwurf,
-KW 49,30. Nov–6. Dez,Cyber Monday Nachfassaktion,,,Entwurf,
-KW 50,7.–13. Dez,,,,Entwurf,
-KW 51,14.–20. Dez,,,,Entwurf,
-KW 52,21.–27. Dez,,,,Entwurf,
-KW 1 (2027),28. Dez–3. Jan,Neujahrskampagne,,,Entwurf,
-KW 2 (2027),4.–10. Jan,,,,Entwurf,
-KW 3 (2027),11.–17. Jan,,,,Entwurf,
-KW 4 (2027),18.–24. Jan,,,,Entwurf,
-,,,,,,
-,,,,,,
-Legende,,,,,,
-TRUE,Kampagne bestätigt und/oder bereits online,,,,,
-Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,
-"Spalte „Embargo / Freigabe für Partner“: Solange hier ein Termin steht, bitte noch NICHT öffentlich posten (Rabatthöhe, Code, Termin). „–“ bedeutet freier Content ohne Embargo.",,,,,,
-"Spalte „Rabattcode“: gold hinterlegt = aktueller, freigegebener Code zum direkten Verwenden. „Folgt“ = Code steht noch nicht fest, bitte vor Bewerbung mit dem Affiliate-Team abstimmen.",,,,,,
-,,,,,,
-"Hinweis: Alle Produktangaben (Rabatte, Limits, Kennzahlen) stammen aus einer Live-Prüfung von iqcapital.io bzw. aus internen Vorgaben. Vor Veröffentlichung jeder Kampagne bitte aktuelle Werte auf der Website / im Checkout gegenprüfen, da sich Rabattaktionen kurzfristig ändern.",,,,,,`;
+  var FALLBACK_CSV = `,,,,,,,,,
+,IQ CAPITAL, CONTENTPLAN 2026 / 2027,,,,,,,
+,,,,,,,,,
+     Marketing / Affiliate Team  ·  Produktdaten live von iqcapital.io geprüft,,,,,,,,,
+,,,,,,,,,
+KW,Zeitraum,Kampagnenthema,Specialsale,Sonstige Infos,Status / Freigabe,Marketing Material,Kampagnenthema EN,Specialsale EN,Sonstige Infos EN
+KW 36,31. Aug–6. Sep,Tradovate Launch,Dienstag bis Freitag: 3+1 Aktion auf Instant Fundings und Challenges + 100 % Revenue Share auf den ersten Payout,"Tradovate ist seit Dienstag, 01.09.2026, live. TradingView ist ebenfalls bereits als Charting im CFD Live verfügbar.",TRUE,https://drive.google.com/drive/folders/1QuCuvgnNQ0_9DlhnqvB4ua5aeHnxs8xu?usp=sharing https://docs.google.com/document/d/1HDpnRZ54LALwKmIyKlw7SxY4_dtbUM42pRGMtRl8QkA/edit?tab=t.0,Tradovate Launch,"Tuesday to Friday: 3+1 promo on Instant Fundings and Challenges, plus 100% revenue share on the first payout","Tradovate has been live since Tuesday, 1 September 2026. TradingView is also available as charting in CFD Live."
+KW 37,7.–13. Sep,Fokus: Instant Fundings,"Montag bis Freitag: 100 % Fokus auf Instant Fundings – mit 3+1 Aktion und einem riesigen Giveaway: 100 x 50K Fundings, die unter allen Käufern von Instant Fundings verlost werden.",,TRUE,https://drive.google.com/drive/folders/1E6gJ0E_8fx7Z1yGWyS5CnhbGnGnaMUoU,Focus: Instant Fundings,Monday to Friday: 100% focus on Instant Fundings – with a 3+1 promo and a huge giveaway: 100 x 50K fundings raffled among everyone who buys an Instant Funding.,
+KW 38,14.–20. Sep,Q3 - Quarterly Event. / 17.09,,,Entwurf,,Q3 - Quarterly Event / 17.09,,
+KW 39,21.–27. Sep,After Quarterly Week,,,Entwurf,,After Quarterly Week,,
+KW 40,28. Sep–4. Okt,,,,Entwurf,,,,
+KW 41,5.–11. Okt,,,,Entwurf,,,,
+KW 42,12.–18. Okt,,,,Entwurf,,,,
+KW 43,19.–25. Okt,,,,Entwurf,,,,
+KW 44,26. Okt–1. Nov,,,,Entwurf,,,,
+KW 45,2.–8. Nov,,,,Entwurf,,,,
+KW 46,9.–15. Nov,Black-Friday-Vorbereitung,,,Entwurf,,Black Friday preparations,,
+KW 47,16.–22. Nov,Black Friday Sale,,,Entwurf,,Black Friday Sale,,
+KW 48,23.–29. Nov,Black Friday Week,,,Entwurf,,Black Friday Week,,
+KW 49,30. Nov–6. Dez,Cyber Monday Nachfassaktion,,,Entwurf,,Cyber ​​Monday Follow-Up Campaign,,
+KW 50,7.–13. Dez,,,,Entwurf,,,,
+KW 51,14.–20. Dez,,,,Entwurf,,,,
+KW 52,21.–27. Dez,,,,Entwurf,,,,
+KW 1 (2027),28. Dez–3. Jan,Neujahrskampagne,,,Entwurf,,New Year's campaign,,
+KW 2 (2027),4.–10. Jan,,,,Entwurf,,,,
+KW 3 (2027),11.–17. Jan,,,,Entwurf,,,,
+KW 4 (2027),18.–24. Jan,,,,Entwurf,,,,
+,,,,,,,,,
+,,,,,,,,,
+Legende,,,,,,,,,
+TRUE,Kampagne bestätigt und/oder bereits online,,,,,,,,
+Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,,,,
+"Spalte „Embargo / Freigabe für Partner“: Solange hier ein Termin steht, bitte noch NICHT öffentlich posten (Rabatthöhe, Code, Termin). „–“ bedeutet freier Content ohne Embargo.",,,,,,,,,
+"Spalte „Rabattcode“: gold hinterlegt = aktueller, freigegebener Code zum direkten Verwenden. „Folgt“ = Code steht noch nicht fest, bitte vor Bewerbung mit dem Affiliate-Team abstimmen.",,,,,,,,,
+,,,,,,,,,
+"Hinweis: Alle Produktangaben (Rabatte, Limits, Kennzahlen) stammen aus einer Live-Prüfung von iqcapital.io bzw. aus internen Vorgaben. Vor Veröffentlichung jeder Kampagne bitte aktuelle Werte auf der Website / im Checkout gegenprüfen, da sich Rabattaktionen kurzfristig ändern.",,,,,,,,,`;
 
   /* Übersetzungen für Sheet-Inhalte, falls das Sheet keine "... EN"-Spalten hat.
      Schlüssel = deutscher Zelltext (Whitespace normalisiert). Unbekannte Texte bleiben Deutsch. */
@@ -302,7 +303,7 @@ Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,
     for(var r=hi+1;r<rows.length;r++){
       var kw=(rows[r][0]||"").trim(), m=kw.match(/^KW\s*(\d+)(?:\s*\((\d{4})\))?/i);
       if(!m){ if(out.length) break; else continue; }
-      var g=function(k){ return C[k]>=0 ? (rows[r][C[k]]||"").trim() : ""; };
+      var g=function(k){ return C[k]>=0 ? (rows[r][C[k]]||"").replace(/[\u200B-\u200D\uFEFF]/g,"").trim() : ""; };  /* GOOGLETRANSLATE liefert Zero-Width-Spaces */
       var links=g("link").match(/https?:\/\/[^\s,;]+/g)||[]; var link=links[0]||"";
       out.push({ week:+m[1], yearExplicit:m[2]?+m[2]:null, period:g("per"), topic:g("topic"), special:g("special"),
                  info:g("info"), topicEN:g("topicEN"), specialEN:g("specialEN"), infoEN:g("infoEN"),
