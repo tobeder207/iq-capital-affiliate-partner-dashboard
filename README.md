@@ -1,6 +1,4 @@
-# IQ Capital Affiliate Partner Dashboard
+# Umgezogen
 
-Wöchentlicher Contentplan für IQ-Capital-Affiliates. Statische Seite, die bei jedem Aufruf den veröffentlichten
-Google-Sheet-Tab als CSV liest. Inhalte werden ausschließlich im Sheet gepflegt; ein Deploy ist nur bei Designänderungen nötig.
-
-Quelle und Build: Ordner „IQ Capital Partner Desk" im Obsidian-Vault (`build.py` erzeugt `site/index.html`).
+Das IQ Capital Affiliate Partner Dashboard liegt jetzt unter https://iqcapital-partners.github.io/
+(Repo: https://github.com/iqcapital-partners/iqcapital-partners.github.io). Diese Seite leitet nur noch weiter.
