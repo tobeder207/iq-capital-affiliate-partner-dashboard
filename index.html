@@ -102,6 +102,8 @@ html:not([data-lang="en"]) .en{display:none!important}
 .cta:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 .cta svg{width:15px;height:15px;flex:none}
 .actions .hint{font-size:13.5px;color:var(--ink-45);max-width:30ch}
+.actions .extra{font-size:13.5px;font-weight:500;color:var(--ink-70);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px;white-space:nowrap}
+.actions .extra:hover{color:var(--ink);border-color:var(--green)}
 
 /* outlook */
 .sec{margin-top:64px}
@@ -244,7 +246,7 @@ Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,
     de: { week:"KW", approved:"Freigegeben", draft:"Entwurf", open:"Noch offen", promo:"Aktion", note:"Hinweis",
           cta:"Material öffnen", hint:"Mailings für deinen Verteiler und Creatives zur Bewerbung",
           soon:"Material folgt, sobald die Woche freigegeben ist.", soonOk:"Materialordner folgt in Kürze.",
-          material:"Material", showMore:"anzeigen", to:"bis", less:"Einklappen",
+          material:"Material", mailings:"Mailings öffnen", more:"Weiteres Material", showMore:"anzeigen", to:"bis", less:"Einklappen",
           none:"Aktuell ist keine Woche eingeplant.",
           live:"Stand: Sheet gelesen am", cached:"Stand: letzter bekannter Stand vom", offline:"Stand: Offline-Kopie vom Build. Live-Daten nicht erreichbar.",
           months:{Jan:"Januar",Feb:"Februar",Mär:"März",Mrz:"März",Apr:"April",Mai:"Mai",Jun:"Juni",Jul:"Juli",Aug:"August",Sep:"September",Okt:"Oktober",Nov:"November",Dez:"Dezember"},
@@ -252,7 +254,7 @@ Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,
     en: { week:"Week", approved:"Approved", draft:"Draft", open:"Not yet planned", promo:"Promo", note:"Note",
           cta:"Open material", hint:"Mailings for your list and creatives for promotion",
           soon:"Material follows once the week is approved.", soonOk:"Material folder coming shortly.",
-          material:"Material", showMore:"Show", to:"to", less:"Collapse",
+          material:"Material", mailings:"Open mailings", more:"More material", showMore:"Show", to:"to", less:"Collapse",
           none:"No week is planned at the moment.",
           live:"Sheet last read", cached:"Last known state from", offline:"Offline copy from build. Live data unreachable.",
           months:{Jan:"January",Feb:"February",Mär:"March",Mrz:"March",Apr:"April",Mai:"May",Jun:"June",Jul:"July",Aug:"August",Sep:"September",Okt:"October",Nov:"November",Dez:"December"},
@@ -301,10 +303,10 @@ Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,
       var kw=(rows[r][0]||"").trim(), m=kw.match(/^KW\s*(\d+)(?:\s*\((\d{4})\))?/i);
       if(!m){ if(out.length) break; else continue; }
       var g=function(k){ return C[k]>=0 ? (rows[r][C[k]]||"").trim() : ""; };
-      var link=(g("link").match(/https?:\/\/\S+/)||[""])[0];
+      var links=g("link").match(/https?:\/\/[^\s,;]+/g)||[]; var link=links[0]||"";
       out.push({ week:+m[1], yearExplicit:m[2]?+m[2]:null, period:g("per"), topic:g("topic"), special:g("special"),
                  info:g("info"), topicEN:g("topicEN"), specialEN:g("specialEN"), infoEN:g("infoEN"),
-                 approved:/^(true|wahr|ja|yes|freigegeben)$/i.test(g("status")), link:link });
+                 approved:/^(true|wahr|ja|yes|freigegeben)$/i.test(g("status")), link:link, links:links });
     }
     var explicit=out.filter(function(x){return x.yearExplicit;}).map(function(x){return x.yearExplicit;});
     var base=explicit.length?Math.min.apply(null,explicit)-1:new Date().getFullYear();
@@ -361,7 +363,10 @@ Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,
     if(hero.link){
       h+='<div class="actions"><a class="cta" href="'+esc(hero.link)+'" target="_blank" rel="noopener">'+L.cta
         +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></a>'
-        +'<span class="hint">'+L.hint+'</span></div>';
+        +'<span class="hint">'+L.hint+'</span>'
+        +hero.links.slice(1).map(function(u){ var lbl=/docs\.google\.com\/document/.test(u)?L.mailings:L.more;
+            return '<a class="extra" href="'+esc(u)+'" target="_blank" rel="noopener">'+lbl+' ↗</a>'; }).join("")
+        +'</div>';
     } else {
       h+='<p class="empty">'+(hero.approved?L.soonOk:L.soon)+'</p>';
     }
