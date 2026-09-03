@@ -181,8 +181,8 @@ footer{margin-top:44px;font-size:12.5px;color:var(--ink-30);line-height:1.7}
       <span class="de">Idee steht, ist aber nicht abgestimmt. Nichts davon nach draußen — keine Termine, keine Rabatthöhen.</span><span class="en">The idea is set but not signed off. Nothing goes public yet — no dates, no discount levels.</span>
     </div>
     <div class="rule">
-      <b><span class="de">Die nächste Woche steht freitags</span><span class="en">Next week is set on Friday</span></b>
-      <span class="de">Spätestens Freitag findest du hier Thema, Aktion und den Materialordner für die kommende Woche.</span><span class="en">By Friday at the latest you'll find the topic, promo and material folder for the coming week here.</span>
+      <b><span class="de">Freitag 22 Uhr wechselt die Woche</span><span class="en">The week changes Friday at 10 pm</span></b>
+      <span class="de">Angebote laufen Montag bis Freitag. Freitags ab 22 Uhr steht hier oben die kommende Woche mit Thema, Aktion und Materialordner, damit du übers Wochenende planen kannst.</span><span class="en">Promos run Monday to Friday. From 10 pm (Berlin time) on Friday the coming week appears up top with topic, promo and material folder, so you can plan over the weekend.</span>
     </div>
   </div>
 
@@ -282,12 +282,26 @@ Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,,,,
     return rows;
   }
 
-  function isoWeek(d){
-    var x=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
-    var day=x.getUTCDay()||7; x.setUTCDate(x.getUTCDate()+4-day);
-    var y=x.getUTCFullYear();
-    var w=Math.ceil((((x-Date.UTC(y,0,1))/864e5)+1)/7);
-    return {year:y,week:w};
+  /* Wall-clock in Berlin. ?at=YYYY-MM-DDTHH:MM (Berliner Zeit) simuliert einen Zeitpunkt, z. B. zum Testen der Umschaltung. */
+  function berlinNow(){
+    var q=new URLSearchParams(location.search).get("at");
+    if(q){ var m=q.match(/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):?(\d{2})?)?/); if(m) return {y:+m[1],mo:+m[2]-1,d:+m[3],h:m[4]?+m[4]:12}; }
+    var p={};
+    try{
+      new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Berlin",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",hour12:false})
+        .formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});
+      return {y:+p.year,mo:+p.month-1,d:+p.day,h:(+p.hour)%24};
+    }catch(e){ var d=new Date(); return {y:d.getFullYear(),mo:d.getMonth(),d:d.getDate(),h:d.getHours()}; }
+  }
+  /* Welche KW oben steht: Angebote laufen Mo–Fr, deshalb springt die Seite freitags ab 22:00 Uhr
+     (Berliner Zeit) auf die kommende Woche, und bleibt dort über das Wochenende. */
+  var SWITCH_HOUR=22;
+  function effectiveWeekKey(){
+    var b=berlinNow(), t=Date.UTC(b.y,b.mo,b.d), wd=new Date(t).getUTCDay(); /* 0=So … 5=Fr, 6=Sa */
+    var shift=(wd===5&&b.h>=SWITCH_HOUR)?3:(wd===6?2:(wd===0?1:0));
+    var x=new Date(t+shift*864e5), day=x.getUTCDay()||7; x.setUTCDate(x.getUTCDate()+4-day);
+    var y=x.getUTCFullYear(), w=Math.ceil((((x-Date.UTC(y,0,1))/864e5)+1)/7);
+    return y*100+w;
   }
 
   function parseRows(rows){
@@ -339,7 +353,7 @@ Entwurf,"Content-Idee vorgeschlagen, noch nicht final abgestimmt",,,,,,,,
   var state={rows:[],lang:"de",source:"offline",when:null};
 
   function pick(rows){
-    var now=isoWeek(new Date()), tk=now.year*100+now.week;
+    var tk=effectiveWeekKey();
     var future=rows.filter(function(r){return r.key>=tk;});
     var hero=future.filter(function(r){return r.approved;})[0]||future[0]||null;
     var idx=hero?rows.indexOf(hero):rows.length;
